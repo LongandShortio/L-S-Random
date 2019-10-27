@@ -18,7 +18,7 @@ secret="" # put your secret key
 leverage= 4 # Set the leverage to 4
 # --------------------------
 
-session=api.Account(api_key,secret,4)
+session=api.Account(api_key,secret,leverage)
 
 
 ##
