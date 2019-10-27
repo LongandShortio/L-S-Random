@@ -34,11 +34,13 @@ if __name__ == '__main__':
 
     while True:
         if session.my_position()['result'][0]['side']=="Buy":
+            session.cancel_all_pending_order()
             logging.info('Close long position @ market')
             size=session.my_position()['result'][0]['size']
             session.market_close("Sell", size)
 
         if session.my_position()['result'][0]['side']=="Sell":
+            session.cancel_all_pending_order()
             logging.info('Close short position @ market')
             size=session.my_position()['result'][0]['size']
             session.market_close("Buy", size)
@@ -46,6 +48,7 @@ if __name__ == '__main__':
 
 
         if session.my_position()['result'][0]['side']=="None":
+            session.cancel_all_pending_order()
             logging.info('No position')
             if session.get_active_order()['result']['data'][0]['order_status']!="Cancelled":
                 logging.info('Cancel active orders if any')
@@ -74,6 +77,5 @@ if __name__ == '__main__':
                 session.place_active_order(side, size, price, stop_loss, take_profit)
         logging.info('Sleep for 2 hours')
         sleep(2*3600)
-
 
 
